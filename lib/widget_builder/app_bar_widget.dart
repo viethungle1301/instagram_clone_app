@@ -1,63 +1,69 @@
 import 'package:flutter/material.dart';
 
-import '../assets/app_assets.dart';
+import '../assets/asset_image.dart';
 
 class AppBarWidget extends StatelessWidget {
-  const AppBarWidget({Key? key, required this.childNewFeed, required this.childPoster}) : super(key: key);
+  const AppBarWidget(
+      {Key? key, required this.childNewFeed, required this.childPoster})
+      : super(key: key);
 
   final Widget childNewFeed;
   final Widget childPoster;
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       body: Stack(
         children: [
           Container(
             height: 80,
-              padding: EdgeInsets.symmetric(horizontal: 10,vertical: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
             child: Row(
               children: [
                 GestureDetector(
-                  onTap: () {
-                    print('sad');
-                  },
+                  onTap: () {},
                   child: Row(children: [
                     Image.asset(
-                      AppAsset.imageLogoText,
+                      ImageAsset.imageLogoText,
                       height: 70,
                       width: 100,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 5,
                     ),
                     Container(
                         alignment: Alignment.center,
-                        child: Icon(Icons.keyboard_arrow_down_sharp,color: Colors.black,))
+                        child: const Icon(
+                          Icons.keyboard_arrow_down_sharp,
+                          color: Colors.black,
+                        ))
                   ]),
                 ),
-                Spacer(),
+                const Spacer(),
                 InkWell(
                     onTap: () {},
-                    child: Icon(
-                      Icons.favorite_border,color: Colors.black,
+                    child: const Icon(
+                      Icons.favorite_border,
+                      color: Colors.black,
                     )),
                 const SizedBox(
                   width: 10,
                 ),
                 InkWell(
                   onTap: () {},
-                  child: Image.asset(AppAsset.iconMessenger),
+                  child: Image.asset(ImageAsset.iconMessenger),
                 ),
               ],
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: 60),
+            margin: const EdgeInsets.only(top: 60),
             child: childNewFeed,
           ),
           Container(
-            margin: EdgeInsets.only(top: 160,),
+            margin: const EdgeInsets.only(
+              top: 160,
+            ),
             child: childPoster,
           )
         ],

@@ -1,4 +1,4 @@
-class AppAsset {
+class ImageAsset {
   static const String imageLogo = 'assets/images/logo.png';
   static const String imageLogoMeta = 'assets/images/logoMeta.png';
   static const String iconVideo = 'assets/icons/video.png';

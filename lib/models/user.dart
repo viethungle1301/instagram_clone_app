@@ -136,7 +136,7 @@ class Dob {
   };
 }
 
-enum Gender { FEMALE, MALE }
+enum Gender { MALE, FEMALE }
 
 final genderValues = EnumValues({
   "female": Gender.FEMALE,

@@ -5,8 +5,8 @@ import 'package:test001/screens/main_screen.dart';
 import 'package:test001/screens/splash_screen.dart';
 
 final Map<String, WidgetBuilder> routes = {
-  SplashScreen.routeName : (context) => const SplashScreen(),
-  LoginScreen.routeName : (context) =>  LoginScreen(),
-  MainScreen.routeName : (context) => const MainScreen(),
-  ForgetPasswordScreen.routeName : (context) => ForgetPasswordScreen(),
+  SplashScreen.routeName: (context) => const SplashScreen(),
+  LoginScreen.routeName: (context) => const LoginScreen(),
+  MainScreen.routeName: (context) => const MainScreen(),
+  ForgetPasswordScreen.routeName: (context) => const ForgetPasswordScreen(),
 };

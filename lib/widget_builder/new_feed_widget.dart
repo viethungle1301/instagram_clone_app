@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../models/users.dart';
-
+// ignore: must_be_immutable
 class WidgetContainer extends StatelessWidget {
   WidgetContainer({super.key, required this.name, required this.urlImage});
   String name;
