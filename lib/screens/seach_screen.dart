@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer_animation/shimmer_animation.dart';
 import '../models/poster.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -26,11 +27,10 @@ class _SearchScreenState extends State<SearchScreen> {
           final json = response.data;
           userSearch = Poster.fromJson(json);
         });
-      } else {
-        print('ERROR');
-      }
-    } catch (object) {
-      print(object);
+      } else {}
+    } catch (e) {
+      // ignore: avoid_print
+      print(e);
     }
   }
 
@@ -42,12 +42,26 @@ class _SearchScreenState extends State<SearchScreen> {
           children: [
             Container(
               margin: const EdgeInsets.only(top: 30, left: 20, right: 20),
-              child: const TextField(
+              decoration:   BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: 5,
+                    offset: const Offset(1, 1),
+                    color: Colors.grey.withOpacity(0.5)
+                  )
+                ]
+              ),
+              child:  TextField(
                 textInputAction: TextInputAction.search,
                 maxLines: 1,
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(),
+                  prefixIcon:const  Icon(Icons.search,color:  Colors.grey,size: 16,),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
                   hintText: "search",
+
                 ),
               ),
             ),
@@ -62,8 +76,18 @@ class _SearchScreenState extends State<SearchScreen> {
                 itemBuilder: (BuildContext context, int index) {
                   final item = userSearch?.data?[index];
                   if (item == null) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
+                    return Shimmer(
+                      duration: const Duration(seconds: 3), //Default value
+                      interval: const Duration(
+                          seconds: 5), //Default value: Duration(seconds: 0)
+                      color: Colors.white, //Default value
+                      colorOpacity: 0, //Default value
+                      enabled: true, //Default value
+                      direction:
+                          const ShimmerDirection.fromLTRB(), //Default Value
+                      child: Container(
+                        color: Colors.grey,
+                      ),
                     );
                   }
                   return Image.network(

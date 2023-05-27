@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test001/assets/asset_image.dart';
 import 'package:test001/screens/home_screen.dart';
+import 'package:test001/screens/profile_screen.dart';
 import 'package:test001/screens/seach_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -60,12 +61,7 @@ class _MainScreenState extends State<MainScreen> {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
-            Center(
-              child: Text(
-                'Person',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ),
+            ProfileScreen(),
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(

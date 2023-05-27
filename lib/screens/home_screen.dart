@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:test001/assets/asset_image.dart';
 import 'package:test001/widget_builder/app_bar_widget.dart';
 import 'package:test001/widget_builder/new_feed_widget.dart';
@@ -35,10 +36,14 @@ class _HomeScreenState extends State<HomeScreen> {
           user = User.fromJson(json);
         });
       } else {
-        print(response.statusCode);
+        if (kDebugMode) {
+          print(response.statusCode);
+        }
       }
     } catch (e) {
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
     }
   }
 
@@ -53,7 +58,9 @@ class _HomeScreenState extends State<HomeScreen> {
           poster = Poster.fromJson(jsonUser);
         });
       } else {
-        print("Error User");
+        if (kDebugMode) {
+          print("Error User");
+        }
       }
     } catch (e) {
       if (kDebugMode) {
@@ -65,19 +72,22 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return AppBarWidget(
-      childNewFeed:
-          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Container(
+      childNewFeed: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+            Container(
             height: 100,
             padding: const EdgeInsets.symmetric(horizontal: 5),
-            child: ListView.builder(
+              child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: user?.results?.length,
                 itemBuilder: (BuildContext context, int index) {
                   final item = user?.results?[index];
                   if (item == null) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
+                    return Shimmer(
+                      // ignore: sort_child_properties_last
+                      child: const CircularProgressIndicator(),
+                      color: Colors.grey,
                     );
                   }
                   return WidgetContainer(
@@ -104,16 +114,33 @@ class _HomeScreenState extends State<HomeScreen> {
               return const Center(
                 child: CircularProgressIndicator(),
               );
+              // return  Shimmer(
+              //   duration:const Duration(seconds: 3), //Default value
+              //   interval:const Duration(seconds: 5), //Default value: Duration(seconds: 0)
+              //   color: Colors.white, //Default value
+              //   colorOpacity: 0, //Default value
+              //   enabled: true, //Default value
+              //   direction: const ShimmerDirection.fromLTRB(),  //Default Value
+              //   child: Container(
+              //     color: Colors.grey,
+              //   ),
+              // );
             }
             return PosterWidget(
                 username: "hungkthn_k57",
                 imagePoster: itemPoster.mediaUrl.toString(),
                 like: 4592,
-                avatar:  ImageAsset.imageAvatarHung,
+                avatar: ImageAsset.imageAvatarHung,
                 check: false,
                 subText: false,
                 stt: itemPoster.caption.toString());
           }),
+    );
+  }
+
+  Widget circularBuilder() {
+    return const Center(
+      child: CircularProgressIndicator(),
     );
   }
 }
